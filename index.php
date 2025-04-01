@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (password === null) return; // User canceled
 
-            var correctPassword = "12345"; // Set the required password
+            var correctPassword = "Infive@321"; // Set the required password
 
             if (password === correctPassword) {
                 sessionStorage.setItem("passwordVerified", "true");

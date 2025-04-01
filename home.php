@@ -62,7 +62,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </td>
                         <td>
                             <button class="btn btn-secondary"
-                                onclick="copyLink('http://localhost/card_details/view_members.php?id=<?= $row['company_link'] ?>')">Copy Link</button>
+                                onclick="copyLink('https://infiveprint.com/id/view_members.php?id=<?= $row['company_link'] ?>')">Copy Link</button>
                         </td>
                         <td>
                             <a href="delete_company.php?id=<?= $row['id'] ?>" class="btn btn-danger"
