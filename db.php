@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$user = "root"; 
-$pass = ""; 
-$dbname = "card_details";
+$user = "u263749830_card_id"; 
+$pass = "9Nzprz^&"; 
+$dbname = "u263749830_id";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 
