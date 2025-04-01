@@ -934,9 +934,23 @@ if (isset($_GET['id'])) {
 
     <script>
         function toggleFullScreen() {
-            document.getElementById('membersTableContainerFullScreen').style.display = 'block';
-            document.body.style.overflow = 'hidden';
+    // Make sure the fullscreen table has the latest status values
+    document.querySelectorAll('.status-toggle').forEach(toggle => {
+        const memberId = toggle.dataset.memberId;
+        const isChecked = toggle.checked;
+        $(`#membersTableFullScreen .status-toggle[data-member-id="${memberId}"]`).prop('checked', isChecked);
+        
+        const label = $(`#membersTableFullScreen .status-toggle[data-member-id="${memberId}"]`).closest('.toggle-container').find('.toggle-label');
+        if (isChecked) {
+            label.text('Approved').removeClass('status-pending').addClass('status-approved');
+        } else {
+            label.text('Pending').removeClass('status-approved').addClass('status-pending');
         }
+    });
+
+    document.getElementById('membersTableContainerFullScreen').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
 
         function closeFullScreen() {
             document.getElementById('membersTableContainerFullScreen').style.display = 'none';
@@ -1023,35 +1037,46 @@ if (isset($_GET['id'])) {
 
         // Initialize toggle switches functionality
         function initializeToggleSwitches() {
-            $('.status-toggle').change(function () {
-                var memberId = $(this).data('member-id');
-                var isChecked = $(this).is(':checked') ? 1 : 0;
-                var toggleContainer = $(this).closest('.toggle-container');
-                var statusLabel = toggleContainer.find('.toggle-label');
+    $('.status-toggle').change(function () {
+        var memberId = $(this).data('member-id');
+        var isChecked = $(this).is(':checked') ? 1 : 0;
+        var toggleContainer = $(this).closest('.toggle-container');
+        var statusLabel = toggleContainer.find('.toggle-label');
 
-                $.ajax({
-                    url: 'update_status.php',
-                    type: 'POST',
-                    data: {
-                        member_id: memberId,
-                        status: isChecked
-                    },
-                    success: function (response) {
-                        // Update the label text and color
-                        if (isChecked) {
-                            statusLabel.text('Approved').removeClass('status-pending').addClass('status-approved');
-                        } else {
-                            statusLabel.text('Pending').removeClass('status-approved').addClass('status-pending');
-                        }
-                    },
-                    error: function () {
-                        alert('Error updating status');
-                        // Revert the toggle if there's an error
-                        $(this).prop('checked', !isChecked);
-                    }
-                });
-            });
-        }
+        $.ajax({
+            url: 'update_status.php',
+            type: 'POST',
+            data: {
+                member_id: memberId,
+                status: isChecked
+            },
+            success: function (response) {
+                // Update the current table
+                if (isChecked) {
+                    statusLabel.text('Approved').removeClass('status-pending').addClass('status-approved');
+                } else {
+                    statusLabel.text('Pending').removeClass('status-approved').addClass('status-pending');
+                }
+
+                // Update the corresponding toggle in the other table
+                const otherToggle = $(`.status-toggle[data-member-id="${memberId}"]`).not(this);
+                otherToggle.prop('checked', isChecked);
+                
+                const otherLabel = otherToggle.closest('.toggle-container').find('.toggle-label');
+                if (isChecked) {
+                    otherLabel.text('Approved').removeClass('status-pending').addClass('status-approved');
+                } else {
+                    otherLabel.text('Pending').removeClass('status-approved').addClass('status-pending');
+                }
+            },
+            error: function () {
+                alert('Error updating status');
+                // Revert the toggle if there's an error
+                $(this).prop('checked', !isChecked);
+            }
+        });
+    });
+}
 
         // On page load
         document.addEventListener("DOMContentLoaded", function () {
