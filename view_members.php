@@ -29,6 +29,7 @@ if (isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -79,7 +80,7 @@ if (isset($_GET['id'])) {
             border: 1px solid #dee2e6;
             border-radius: 5px;
             background-color: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         /* Members table styling */
@@ -109,57 +110,68 @@ if (isset($_GET['id'])) {
         /* Column width adjustments */
         .members-table th:nth-child(1),
         .members-table td:nth-child(1) {
-            width: 150px; /* Name */
+            width: 150px;
+            /* Name */
         }
-        
+
         .members-table th:nth-child(2),
         .members-table td:nth-child(2) {
-            width: 100px; /* Title */
+            width: 100px;
+            /* Title */
         }
-        
+
         .members-table th:nth-child(3),
         .members-table td:nth-child(3) {
-            width: 120px; /* NIC */
+            width: 120px;
+            /* NIC */
         }
-        
+
         .members-table th:nth-child(4),
         .members-table td:nth-child(4) {
-            width: 100px; /* Register No */
+            width: 100px;
+            /* Register No */
         }
-        
+
         .members-table th:nth-child(5),
         .members-table td:nth-child(5) {
-            width: 80px; /* Expire */
+            width: 80px;
+            /* Expire */
         }
-        
+
         .members-table th:nth-child(6),
         .members-table td:nth-child(6) {
-            width: 80px; /* Lifetime */
+            width: 80px;
+            /* Lifetime */
         }
-        
+
         .members-table th:nth-child(7),
         .members-table td:nth-child(7) {
-            width: 150px; /* Remark */
+            width: 150px;
+            /* Remark */
         }
-        
+
         .members-table th:nth-child(8),
         .members-table td:nth-child(8) {
-            width: 120px; /* Profile Photo */
+            width: 120px;
+            /* Profile Photo */
         }
-        
+
         .members-table th:nth-child(9),
         .members-table td:nth-child(9) {
-            width: 120px; /* Signature */
+            width: 120px;
+            /* Signature */
         }
-        
+
         .members-table th:nth-child(10),
         .members-table td:nth-child(10) {
-            width: 100px; /* Action */
+            width: 100px;
+            /* Action */
         }
-        
+
         .members-table th:nth-child(11),
         .members-table td:nth-child(11) {
-            width: 120px; /* Status */
+            width: 120px;
+            /* Status */
         }
 
         /* Zebra striping */
@@ -201,66 +213,69 @@ if (isset($_GET['id'])) {
         }
 
         /* Fullscreen mode */
-          /* Fullscreen mode specific styles */
-    #membersTableContainerFullScreen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #ffffff;
-        z-index: 1000;
-        overflow: auto;
-        display: none;
-        padding: 20px;
-    }
+        /* Fullscreen mode specific styles */
+        #membersTableContainerFullScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 1000;
+            overflow: auto;
+            display: none;
+            padding: 20px;
+        }
 
-    #membersTableFullScreen {
-        width: 100%;
-        table-layout: auto; /* Changed from fixed to auto for better column sizing */
-    }
+        #membersTableFullScreen {
+            width: 100%;
+            table-layout: auto;
+            /* Changed from fixed to auto for better column sizing */
+        }
 
-    #membersTableFullScreen th,
-    #membersTableFullScreen td {
-        padding: 12px 8px; /* Slightly larger padding in fullscreen */
-        vertical-align: middle;
-    }
+        #membersTableFullScreen th,
+        #membersTableFullScreen td {
+            padding: 12px 8px;
+            /* Slightly larger padding in fullscreen */
+            vertical-align: middle;
+        }
 
-    /* Make remark column wider in fullscreen */
-    #membersTableFullScreen th:nth-child(8),
-    #membersTableFullScreen td:nth-child(8) {
-        width: 300px; /* Wider remark column */
-        max-width: 300px;
-    }
+        /* Make remark column wider in fullscreen */
+        #membersTableFullScreen th:nth-child(8),
+        #membersTableFullScreen td:nth-child(8) {
+            width: 300px;
+            /* Wider remark column */
+            max-width: 300px;
+        }
 
-    /* Fullscreen remark styling */
-    #membersTableFullScreen .remark-cell {
-        max-width: 300px;
-    }
+        /* Fullscreen remark styling */
+        #membersTableFullScreen .remark-cell {
+            max-width: 300px;
+        }
 
-    #membersTableFullScreen .full-remark-popup {
-        max-width: 400px;
-    }
+        #membersTableFullScreen .full-remark-popup {
+            max-width: 400px;
+        }
 
-    .close-fullscreen-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1010;
-        padding: 8px 15px;
-        font-size: 16px;
-    }
+        .close-fullscreen-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1010;
+            padding: 8px 15px;
+            font-size: 16px;
+        }
 
-    /* Adjust other columns in fullscreen to accommodate wider remark column */
-    #membersTableFullScreen th:nth-child(1),
-    #membersTableFullScreen td:nth-child(1) {
-        width: auto;
-    }
-    
-    #membersTableFullScreen th:nth-child(2),
-    #membersTableFullScreen td:nth-child(2) {
-        width: auto;
-    }
+        /* Adjust other columns in fullscreen to accommodate wider remark column */
+        #membersTableFullScreen th:nth-child(1),
+        #membersTableFullScreen td:nth-child(1) {
+            width: auto;
+        }
+
+        #membersTableFullScreen th:nth-child(2),
+        #membersTableFullScreen td:nth-child(2) {
+            width: auto;
+        }
 
         /* Toggle switch styles */
         .toggle-container {
@@ -340,7 +355,7 @@ if (isset($_GET['id'])) {
         }
 
         .download-btn {
-            display: inline-block;           
+            display: inline-block;
         }
 
         .restricted {
@@ -430,57 +445,57 @@ if (isset($_GET['id'])) {
             .container {
                 padding: 10px;
             }
-            
+
             h4 {
                 font-size: 18px;
             }
-            
+
             h2 {
                 font-size: 20px;
             }
-            
+
             .company-details th,
             .company-details td {
                 padding: 8px;
                 font-size: 14px;
             }
-            
-            .members-table th, 
+
+            .members-table th,
             .members-table td {
                 font-size: 13px;
                 padding: 8px 6px;
             }
-            
+
             .img-thumbnail {
                 max-width: 60px;
             }
-            
+
             .custom-btn {
                 padding: 6px 10px;
                 font-size: 13px;
                 margin: 3px;
             }
-            
+
             .action-buttons .btn {
                 padding: 4px 6px;
                 font-size: 11px;
             }
-            
+
             .toggle-switch {
                 width: 40px;
                 height: 20px;
             }
-            
+
             .toggle-slider:before {
                 height: 14px;
                 width: 14px;
             }
-            
+
             .toggle-label {
                 font-size: 12px;
                 margin-left: 8px;
             }
-            
+
             .login-hint {
                 font-size: 0.7rem;
             }
@@ -490,47 +505,47 @@ if (isset($_GET['id'])) {
             .container {
                 padding: 8px;
             }
-            
+
             h4 {
                 font-size: 16px;
             }
-            
+
             h2 {
                 font-size: 18px;
                 margin-bottom: 15px;
             }
-            
+
             .company-details th,
             .company-details td {
                 padding: 6px;
                 font-size: 13px;
             }
-            
-            .members-table th, 
+
+            .members-table th,
             .members-table td {
                 font-size: 12px;
                 padding: 6px 4px;
             }
-            
+
             .custom-btn {
                 padding: 5px 8px;
                 font-size: 12px;
                 margin: 2px;
             }
-            
+
             .img-thumbnail {
                 max-width: 50px;
             }
-            
+
             .action-buttons .btn {
                 padding: 3px 5px;
                 font-size: 10px;
             }
-            
+
             .toggle-label {
                 font-size: 11px;
             }
-            
+
             /* Shorten column headers for very small screens */
             .members-table th:nth-child(4) {
                 white-space: nowrap;
@@ -538,7 +553,7 @@ if (isset($_GET['id'])) {
                 text-overflow: ellipsis;
                 max-width: 60px;
             }
-            
+
             .members-table th:nth-child(1) {
                 width: 130px;
             }
@@ -549,34 +564,41 @@ if (isset($_GET['id'])) {
             .container {
                 padding: 5px;
             }
-            
+
             .custom-btn {
                 padding: 4px 6px;
                 font-size: 11px;
             }
-            
-            .members-table th, 
+
+            .members-table th,
             .members-table td {
                 font-size: 11px;
                 padding: 5px 3px;
             }
-            
+
             .img-thumbnail {
                 max-width: 40px;
             }
-            
+
             .toggle-switch {
                 width: 35px;
                 height: 18px;
             }
-            
+
             .toggle-slider:before {
                 height: 12px;
                 width: 12px;
             }
         }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
     </style>
 </head>
+
 <body>
     <div class="container mt-3">
         <img src="images/logo-infive.png" alt="Logo" class="img-fluid" style="max-width: 150px; height: auto;">
@@ -678,8 +700,9 @@ if (isset($_GET['id'])) {
                                                 class="text-primary mx-1 download-btn">
                                                 <i class="fas fa-download"></i>
                                             </a>
-                                            <a href="#" class="text-secondary mx-1 restricted"
-                                                onclick="document.getElementById('uploadProfile_<?= $row['id'] ?>').click();">
+                                            <a href="#"
+                                                class="text-secondary mx-1 <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                                <?= $row['status'] == 1 ? 'onclick="return false;"' : 'onclick="document.getElementById(\'uploadProfile_' . $row['id'] . '\').click();"' ?>>
                                                 <i class="fas fa-upload"></i>
                                             </a>
                                             <form action="upload_profile.php" method="POST" enctype="multipart/form-data"
@@ -717,8 +740,9 @@ if (isset($_GET['id'])) {
                                                 class="text-primary mx-1 download-btn">
                                                 <i class="fas fa-download"></i>
                                             </a>
-                                            <a href="#" class="text-secondary mx-1 restricted"
-                                                onclick="document.getElementById('uploadSignature_<?= $row['id'] ?>').click();">
+                                            <a href="#"
+                                                class="text-secondary mx-1 upload-btn <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                                <?= $row['status'] == 1 ? 'onclick="return false;"' : 'onclick="document.getElementById(\'uploadSignature_' . $row['id'] . '\').click();"' ?> title="Upload Signature">
                                                 <i class="fas fa-upload"></i>
                                             </a>
                                             <form action="upload_signature.php" method="POST" enctype="multipart/form-data"
@@ -748,15 +772,15 @@ if (isset($_GET['id'])) {
                                 <td class="action-buttons">
                                     <!-- Update Button with Company Link -->
                                     <a href="update_member.php?id=<?= $row['id'] ?>&company_link=<?= urlencode($company['company_link']) ?>"
-                                        class="btn btn-warning btn-sm restricted" title="Edit Member">
+                                        class="btn btn-warning btn-sm <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                        title="Edit Member" <?= $row['status'] == 1 ? 'onclick="return false;"' : '' ?>>
                                         <i class="bi bi-pencil"></i>
                                     </a>
 
                                     <!-- Delete Button with Confirmation -->
                                     <a href="delete_member.php?id=<?= $row['id'] ?>&company_link=<?= urlencode($company['company_link']) ?>"
-                                        class="btn btn-danger btn-sm restricted"
-                                        onclick="return confirm('Are you sure you want to delete this member?');"
-                                        title="Delete Member">
+                                        class="btn btn-danger btn-sm <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                        <?= $row['status'] == 1 ? 'onclick="return false;"' : 'onclick="return confirm(\'Are you sure you want to delete this member?\');"' ?> title="Delete Member">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
@@ -934,23 +958,23 @@ if (isset($_GET['id'])) {
 
     <script>
         function toggleFullScreen() {
-    // Make sure the fullscreen table has the latest status values
-    document.querySelectorAll('.status-toggle').forEach(toggle => {
-        const memberId = toggle.dataset.memberId;
-        const isChecked = toggle.checked;
-        $(`#membersTableFullScreen .status-toggle[data-member-id="${memberId}"]`).prop('checked', isChecked);
-        
-        const label = $(`#membersTableFullScreen .status-toggle[data-member-id="${memberId}"]`).closest('.toggle-container').find('.toggle-label');
-        if (isChecked) {
-            label.text('Approved').removeClass('status-pending').addClass('status-approved');
-        } else {
-            label.text('Pending').removeClass('status-approved').addClass('status-pending');
-        }
-    });
+            // Make sure the fullscreen table has the latest status values
+            document.querySelectorAll('.status-toggle').forEach(toggle => {
+                const memberId = toggle.dataset.memberId;
+                const isChecked = toggle.checked;
+                $(`#membersTableFullScreen .status-toggle[data-member-id="${memberId}"]`).prop('checked', isChecked);
 
-    document.getElementById('membersTableContainerFullScreen').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
+                const label = $(`#membersTableFullScreen .status-toggle[data-member-id="${memberId}"]`).closest('.toggle-container').find('.toggle-label');
+                if (isChecked) {
+                    label.text('Approved').removeClass('status-pending').addClass('status-approved');
+                } else {
+                    label.text('Pending').removeClass('status-approved').addClass('status-pending');
+                }
+            });
+
+            document.getElementById('membersTableContainerFullScreen').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
 
         function closeFullScreen() {
             document.getElementById('membersTableContainerFullScreen').style.display = 'none';
@@ -1037,46 +1061,61 @@ if (isset($_GET['id'])) {
 
         // Initialize toggle switches functionality
         function initializeToggleSwitches() {
-    $('.status-toggle').change(function () {
-        var memberId = $(this).data('member-id');
-        var isChecked = $(this).is(':checked') ? 1 : 0;
-        var toggleContainer = $(this).closest('.toggle-container');
-        var statusLabel = toggleContainer.find('.toggle-label');
+            $('.status-toggle').change(function () {
+                var memberId = $(this).data('member-id');
+                var isChecked = $(this).is(':checked') ? 1 : 0;
+                var toggleContainer = $(this).closest('.toggle-container');
+                var statusLabel = toggleContainer.find('.toggle-label');
+                var row = $(this).closest('tr');
 
-        $.ajax({
-            url: 'update_status.php',
-            type: 'POST',
-            data: {
-                member_id: memberId,
-                status: isChecked
-            },
-            success: function (response) {
-                // Update the current table
-                if (isChecked) {
-                    statusLabel.text('Approved').removeClass('status-pending').addClass('status-approved');
-                } else {
-                    statusLabel.text('Pending').removeClass('status-approved').addClass('status-pending');
-                }
+                $.ajax({
+                    url: 'update_status.php',
+                    type: 'POST',
+                    data: {
+                        member_id: memberId,
+                        status: isChecked
+                    },
+                    success: function (response) {
+                        // Update the current table
+                        if (isChecked) {
+                            statusLabel.text('Approved').removeClass('status-pending').addClass('status-approved');
+                            // Disable action buttons in this row
+                            row.find('.action-buttons a').addClass('disabled').attr('onclick', 'return false;');
+                            row.find('.upload-btn').addClass('disabled').attr('onclick', 'return false;');
+                        } else {
+                            statusLabel.text('Pending').removeClass('status-approved').addClass('status-pending');
+                            // Enable action buttons in this row
+                            row.find('.action-buttons a').removeClass('disabled');
+                            row.find('.upload-btn').removeClass('disabled');
+                        }
 
-                // Update the corresponding toggle in the other table
-                const otherToggle = $(`.status-toggle[data-member-id="${memberId}"]`).not(this);
-                otherToggle.prop('checked', isChecked);
-                
-                const otherLabel = otherToggle.closest('.toggle-container').find('.toggle-label');
-                if (isChecked) {
-                    otherLabel.text('Approved').removeClass('status-pending').addClass('status-approved');
-                } else {
-                    otherLabel.text('Pending').removeClass('status-approved').addClass('status-pending');
-                }
-            },
-            error: function () {
-                alert('Error updating status');
-                // Revert the toggle if there's an error
-                $(this).prop('checked', !isChecked);
-            }
-        });
-    });
-}
+                        // Update the corresponding toggle in the other table
+                        const otherToggle = $(`.status-toggle[data-member-id="${memberId}"]`).not(this);
+                        otherToggle.prop('checked', isChecked);
+
+                        const otherLabel = otherToggle.closest('.toggle-container').find('.toggle-label');
+                        const otherRow = otherToggle.closest('tr');
+
+                        if (isChecked) {
+                            otherLabel.text('Approved').removeClass('status-pending').addClass('status-approved');
+                            // Disable action buttons in other table's row
+                            otherRow.find('.action-buttons a').addClass('disabled').attr('onclick', 'return false;');
+                            otherRow.find('.upload-btn').addClass('disabled').attr('onclick', 'return false;');
+                        } else {
+                            otherLabel.text('Pending').removeClass('status-approved').addClass('status-pending');
+                            // Enable action buttons in other table's row
+                            otherRow.find('.action-buttons a').removeClass('disabled');
+                            otherRow.find('.upload-btn').removeClass('disabled');
+                        }
+                    },
+                    error: function () {
+                        alert('Error updating status');
+                        // Revert the toggle if there's an error
+                        $(this).prop('checked', !isChecked);
+                    }
+                });
+            });
+        }
 
         // On page load
         document.addEventListener("DOMContentLoaded", function () {
@@ -1110,4 +1149,5 @@ if (isset($_GET['id'])) {
         }
     </script>
 </body>
+
 </html>
