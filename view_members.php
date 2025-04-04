@@ -728,7 +728,7 @@ if (isset($_GET['id'])) {
                                         </div>
                                     <?php endif; ?>
                                 </td>
-
+                                <!-- #region -->
                                 <!-- Signature Column -->
                                 <td class="text-center">
                                     <?php if (!empty($row['signature'])): ?>
@@ -755,8 +755,9 @@ if (isset($_GET['id'])) {
                                     <?php else: ?>
                                         <span>No Signature</span>
                                         <div class="d-flex justify-content-center">
-                                            <a href="#" class="text-secondary mx-1 restricted"
-                                                onclick="document.getElementById('uploadSignature_<?= $row['id'] ?>').click();">
+                                            <a href="#"
+                                                class="text-secondary mx-1 upload-btn <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                                <?= $row['status'] == 1 ? 'onclick="return false;"' : 'onclick="document.getElementById(\'uploadSignature_' . $row['id'] . '\').click();"' ?> title="Upload Signature">
                                                 <i class="fas fa-upload"></i>
                                             </a>
                                             <form action="upload_signature.php" method="POST" enctype="multipart/form-data"
