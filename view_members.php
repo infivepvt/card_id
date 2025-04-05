@@ -867,8 +867,9 @@ if (isset($_GET['id'])) {
                                                 class="text-primary mx-1 download-btn">
                                                 <i class="fas fa-download"></i>
                                             </a>
-                                            <a href="#" class="text-secondary mx-1 restricted"
-                                                onclick="document.getElementById('uploadProfile_<?= $row['id'] ?>').click();">
+                                            <a href="#"
+                                                class="text-secondary mx-1 <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                                <?= $row['status'] == 1 ? 'onclick="return false;"' : 'onclick="document.getElementById(\'uploadProfile_' . $row['id'] . '\').click();"' ?>>
                                                 <i class="fas fa-upload"></i>
                                             </a>
                                             <form action="upload_profile.php" method="POST" enctype="multipart/form-data"
@@ -906,8 +907,9 @@ if (isset($_GET['id'])) {
                                                 class="text-primary mx-1 download-btn">
                                                 <i class="fas fa-download"></i>
                                             </a>
-                                            <a href="#" class="text-secondary mx-1 restricted"
-                                                onclick="document.getElementById('uploadSignature_<?= $row['id'] ?>').click();">
+                                            <a href="#"
+                                                class="text-secondary mx-1 upload-btn <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                                <?= $row['status'] == 1 ? 'onclick="return false;"' : 'onclick="document.getElementById(\'uploadSignature_' . $row['id'] . '\').click();"' ?> title="Upload Signature">
                                                 <i class="fas fa-upload"></i>
                                             </a>
                                             <form action="upload_signature.php" method="POST" enctype="multipart/form-data"
@@ -920,8 +922,9 @@ if (isset($_GET['id'])) {
                                     <?php else: ?>
                                         <span>Signature</span>
                                         <div class="d-flex justify-content-center">
-                                            <a href="#" class="text-secondary mx-1 restricted"
-                                                onclick="document.getElementById('uploadSignature_<?= $row['id'] ?>').click();">
+                                            <a href="#"
+                                                class="text-secondary mx-1 upload-btn <?= $row['status'] == 1 ? 'restricted disabled' : 'restricted' ?>"
+                                                <?= $row['status'] == 1 ? 'onclick="return false;"' : 'onclick="document.getElementById(\'uploadSignature_' . $row['id'] . '\').click();"' ?> title="Upload Signature">
                                                 <i class="fas fa-upload"></i>
                                             </a>
                                             <form action="upload_signature.php" method="POST" enctype="multipart/form-data"
