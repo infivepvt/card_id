@@ -596,6 +596,36 @@ if (isset($_GET['id'])) {
             pointer-events: none;
             cursor: not-allowed;
         }
+
+        /* Add this to your style section */
+        td[onclick] {
+            cursor: pointer;
+        }
+
+        td[onclick]:hover {
+            background-color: #f0f8ff;
+            /* Light blue background on hover */
+        }
+
+        /* Make sure the feedback appears properly */
+        .copied-feedback {
+            position: absolute;
+            background: #4CAF50;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            z-index: 100;
+        }
+
+        /* For cells that need relative positioning for the feedback */
+        td[onclick] {
+            position: relative;
+        }
     </style>
 </head>
 
@@ -672,12 +702,15 @@ if (isset($_GET['id'])) {
                         while ($row = $result1->fetch_assoc()) {
                             ?>
                             <tr>
-                                <td><strong><?= $count++ ?>.</strong> <?= htmlspecialchars($row['name']) ?></td>
-                                <td><?= htmlspecialchars($row['title']) ?></td>
-                                <td><?= htmlspecialchars($row['nic']) ?></td>
-                                <td><?= htmlspecialchars($row['register_no']) ?></td>
-                                <td><?= !empty($row['expire']) ? htmlspecialchars($row['expire']) : 'No' ?></td>
-                                <td><?= $row['lifetime'] ? "Yes" : "No" ?></td>
+                                <td onclick="copyToClipboard(this)"><strong><?= $count++ ?>.</strong>
+                                    <?= htmlspecialchars($row['name']) ?></td>
+                                <td onclick="copyToClipboard(this)"><?= htmlspecialchars($row['title']) ?></td>
+                                <td onclick="copyToClipboard(this)"><?= htmlspecialchars($row['nic']) ?></td>
+                                <td onclick="copyToClipboard(this)"><?= htmlspecialchars($row['register_no']) ?></td>
+                                <td onclick="copyToClipboard(this)">
+                                    <?= !empty($row['expire']) ? htmlspecialchars($row['expire']) : 'No' ?>
+                                </td>
+                                <td onclick="copyToClipboard(this)"><?= $row['lifetime'] ? "Yes" : "No" ?></td>
                                 <td class="remark-cell" onclick="copyToClipboard(this)" title="Click to copy"
                                     data-fulltext="<?= !empty($row['remark']) ? htmlspecialchars($row['remark']) : 'No Remark' ?>">
                                     <div class="remark-content">
@@ -840,12 +873,14 @@ if (isset($_GET['id'])) {
                             ?>
                             <tr>
                                 <td><?= $count++ ?></td>
-                                <td><?= htmlspecialchars($row['name']) ?></td>
-                                <td><?= htmlspecialchars($row['title']) ?></td>
-                                <td><?= htmlspecialchars($row['nic']) ?></td>
-                                <td><?= htmlspecialchars($row['register_no']) ?></td>
-                                <td><?= !empty($row['expire']) ? htmlspecialchars($row['expire']) : 'No' ?></td>
-                                <td><?= $row['lifetime'] ? "Yes" : "No" ?></td>
+                                <td onclick="copyToClipboard(this)"><?= htmlspecialchars($row['name']) ?></td>
+                                <td onclick="copyToClipboard(this)"><?= htmlspecialchars($row['title']) ?></td>
+                                <td onclick="copyToClipboard(this)"><?= htmlspecialchars($row['nic']) ?></td>
+                                <td onclick="copyToClipboard(this)"><?= htmlspecialchars($row['register_no']) ?></td>
+                                <td onclick="copyToClipboard(this)">
+                                    <?= !empty($row['expire']) ? htmlspecialchars($row['expire']) : 'No' ?>
+                                </td>
+                                <td onclick="copyToClipboard(this)"><?= $row['lifetime'] ? "Yes" : "No" ?></td>
                                 <td class="remark-cell" onclick="copyToClipboard(this)" title="Click to copy"
                                     data-fulltext="<?= !empty($row['remark']) ? htmlspecialchars($row['remark']) : 'No Remark' ?>">
                                     <div class="remark-content">
@@ -1135,21 +1170,48 @@ if (isset($_GET['id'])) {
         });
 
         function copyToClipboard(element) {
-            const text = element.getAttribute('data-fulltext');
-            navigator.clipboard.writeText(text).then(() => {
-                const feedback = document.createElement('div');
-                feedback.className = 'copied-feedback';
-                feedback.textContent = 'Copied!';
-                element.appendChild(feedback);
+            // Get the text content, excluding any child elements like buttons or icons
+            let text = element.innerText.trim();
 
-                feedback.style.display = 'block';
-                setTimeout(() => {
-                    feedback.style.display = 'none';
-                    element.removeChild(feedback);
-                }, 1000);
-            }).catch(err => {
+            // For remark cells, use the data-fulltext attribute if available
+            if (element.classList.contains('remark-cell')) {
+                text = element.getAttribute('data-fulltext');
+            }
+
+            // Remove the numbering prefix from name cells (like "1. John Doe")
+            if (element.cellIndex === 0) { // If it's the first column (Name)
+                text = text.replace(/^\d+\.\s*/, ''); // Remove "1. " prefix
+            }
+
+            // Create a temporary textarea element to facilitate copying
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';  // Prevent scrolling to bottom
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                // Execute the copy command
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    // Create and show feedback element
+                    const feedback = document.createElement('div');
+                    feedback.className = 'copied-feedback';
+                    feedback.textContent = 'Copied!';
+                    element.appendChild(feedback);
+
+                    feedback.style.display = 'block';
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                        element.removeChild(feedback);
+                    }, 1000);
+                }
+            } catch (err) {
                 console.error('Failed to copy: ', err);
-            });
+            } finally {
+                // Clean up
+                document.body.removeChild(textarea);
+            }
         }
     </script>
 </body>
